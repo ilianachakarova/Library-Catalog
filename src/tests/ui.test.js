@@ -240,6 +240,48 @@ test('Verify that all books are displayed', async({ page })=>{
     await page.waitForURL("http://localhost:3001/catalog");
     await page.waitForSelector('#dashboard-page');
     const bookElements = await page.$$('#dashboard-page > ul > li');
-    
+
     expect( bookElements.length).toBeGreaterThan(0);
 });
+
+test('Verify that no books are displayed', async({ page })=>{
+    await page.goto("http://localhost:3001/login");
+    await page.fill('#email','peter@abv.bg');
+    await page.fill('#password','123456');
+    await Promise.all([
+        page.click('input[type=submit]'),
+        page.waitForURL("http://localhost:3001/catalog")
+    ]);
+    await page.click('a[href="/profile"]')
+    await page.waitForURL("http://localhost:3001/profile");
+    await page.waitForSelector('#my-books-page');
+    const noBooksElementIsVisible = await page.$('#my-books-page');
+    const isLinkVisible = await noBooksElementIsVisible.isVisible();
+
+    expect(isLinkVisible).toBe(true);
+});
+
+test('Login and navigate to Details page', async({ page })=>{
+    await page.goto("http://localhost:3001/login");
+    await page.fill('#email','peter@abv.bg');
+    await page.fill('#password','123456');
+    await Promise.all([
+        page.click('input[type=submit]'),
+        page.waitForURL("http://localhost:3001/catalog")
+    ]);
+    await page.click('a[href="/catalog"]');
+    await page.click('a[href="/create"]');
+    await page.waitForSelector('#create-form');
+    await page.fill('#title', 'Test Book');
+    await page.fill('#description', 'gfrzgfzrge ew rr37rt wgezr');
+    await page.fill('#image', 'https://m.media-amazon.com/images/I/A1JGM7FozyL._SL1500_.jpg');
+    await page.selectOption('#type', 'Fiction');
+    await page.click('#create-form > fieldset > input');
+    await page.waitForURL("http://localhost:3001/catalog");
+    await page.waitForSelector('.otherBooks');
+    await page.click('.otherBooks a.button');
+    await page.waitForSelector('.book-information');
+    const detailPageTitle = await page.textContent('.book-information h3');
+    
+    expect(detailPageTitle).toBe('Test Book');
+})
