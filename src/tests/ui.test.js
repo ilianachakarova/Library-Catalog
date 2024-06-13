@@ -282,6 +282,18 @@ test('Login and navigate to Details page', async({ page })=>{
     await page.click('.otherBooks a.button');
     await page.waitForSelector('.book-information');
     const detailPageTitle = await page.textContent('.book-information h3');
-    
+
     expect(detailPageTitle).toBe('Test Book');
-})
+});
+
+test('Verify That Guest User Sees Details Button and Button Works Correctly', async( { page })=>{
+    await page.goto("http://localhost:3001/login");
+    await page.click('a[href="/catalog"]');
+    await page.waitForSelector('#dashboard-page > ul');
+    await page.click('.otherBooks a.button');
+    await page.waitForSelector('.book-information');
+    const detailPageTitle = await page.textContent('.book-information h3');
+
+    expect(detailPageTitle).toBeTruthy();
+});
+
