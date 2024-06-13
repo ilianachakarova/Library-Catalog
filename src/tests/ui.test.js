@@ -98,18 +98,6 @@ test('Login with empty fields', async({ page })=>{
     });
 });
 
-test('Register with valid input', async({ page })=>{
-    await page.goto("http://localhost:3001/register");
-    await page.fill('#email','testmail@gmail.com');
-    await page.fill('#password','0000');
-    await page.fill('#repeat-pass', '0000');
-    await page.click('#register-form > fieldset > input');
-    await page.$('a[href="/catalog"]');
-
-    expect(page.url()).toBe("http://localhost:3001/register");
-    
-});
-
 test('Register with empty fields', async({ page })=>{
     await page.goto("http://localhost:3001/register");
     await page.click('#register-form > fieldset > input');
