@@ -22,9 +22,9 @@ jobs:
     - name: Download npm dependencies    
       run: npm install
     - name: Start backend
-      run: npm run start-be 
+      run: npm run start-be &
     - name: Start frontend
-      run: npm run start-fe
+      run: npm run start-fe &
     - name: Start ui tests
       run: npm run test:ui     
    
