@@ -34,6 +34,7 @@ test('Verify "All books" link is visible after user login', async({ page })=>{
     await page.fill('#email','peter@abv.bg');
     await page.fill('#password','123456');
     await page.click('#login-form > fieldset > input');
+    await page.waitForURL('"http://localhost:3001/catalog');
 
     const allBooksLink = await page.$('a[href="/catalog"]');
     const isLinkVisible = await allBooksLink.isVisible();
@@ -46,6 +47,7 @@ test('Verify "My Books" button is visible after user login', async({ page })=>{
     await page.fill('#email','peter@abv.bg');
     await page.fill('#password','123456');
     await page.click('#login-form > fieldset > input');
+    await page.waitForURL('http://localhost:3001/profile');
 
     const allBooksButton = await page.$('a[href="/profile"]');
     const isButtonVisible = await allBooksButton.isVisible();
@@ -70,6 +72,7 @@ test('Verify user email is visible after user login', async({ page })=>{
     await page.fill('#email','peter@abv.bg');
     await page.fill('#password','123456');
     await page.click('#login-form > fieldset > input');
+    await page.waitForURL('http://localhost:3001/catalog')
 
     const allBooksButton = await page.$('#user > span');
     const isButtonVisible = await allBooksButton.isVisible();
@@ -83,6 +86,7 @@ test('Login with valid credentials', async( {page })=>{
     await page.fill('#password','123456');
     await page.click('#login-form > fieldset > input');
     await page.$('a[href="/catalog"]');
+    await page.waitForURL('http://localhost:3001/catalog')
 
     expect(page.url()).toBe("http://localhost:3001/catalog");
 });
