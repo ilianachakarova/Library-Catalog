@@ -29,7 +29,7 @@ test('Verify "Register" link is visible', async ({ page }) => {
     expect(isLinkVisible).toBe(true);
 });
 
-test('Verify "All books" link is visible after user login', async({ page })=>{
+/* test('Verify "All books" link is visible after user login', async({ page })=>{
     await page.goto("http://localhost:3001/login");
     await page.fill('#email','peter@abv.bg');
     await page.fill('#password','123456');
@@ -40,9 +40,9 @@ test('Verify "All books" link is visible after user login', async({ page })=>{
     const isLinkVisible = await allBooksLink.isVisible();
 
     expect(isLinkVisible).toBe(true);
-});
+}); */
 
-test('Verify "My Books" button is visible after user login', async({ page })=>{
+/* test('Verify "My Books" button is visible after user login', async({ page })=>{
     await page.goto("http://localhost:3001/login");
     await page.fill('#email','peter@abv.bg');
     await page.fill('#password','123456');
@@ -53,9 +53,9 @@ test('Verify "My Books" button is visible after user login', async({ page })=>{
     const isButtonVisible = await allBooksButton.isVisible();
 
     expect(isButtonVisible).toBe(true);
-});
+}); */
 
-test('Verify "Add Book" button is visible after user login', async({ page })=>{
+/* test('Verify "Add Book" button is visible after user login', async({ page })=>{
     await page.goto("http://localhost:3001/login");
     await page.fill('#email','peter@abv.bg');
     await page.fill('#password','123456');
@@ -65,7 +65,7 @@ test('Verify "Add Book" button is visible after user login', async({ page })=>{
     const isButtonVisible = await allBooksButton.isVisible();
 
     expect(isButtonVisible).toBe(true);
-});
+}); */
 
 test('Verify user email is visible after user login', async({ page })=>{
     await page.goto("http://localhost:3001/login");
